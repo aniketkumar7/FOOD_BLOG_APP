@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
 @font-face {
   font-family: "Queering";
@@ -26,23 +28,32 @@
 body {
   min-height: 100vh;
   width: 100%;
-  background: url(./assets/gfg.jpg)
-  no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background-color: #e6f7ff;
+  /* Base color */
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 223, 186, 0.6) 0%, transparent 70%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.8) 0%, transparent 70%),
+    repeating-linear-gradient(45deg,
+      rgba(173, 216, 230, 0.15) 0px,
+      rgba(173, 216, 230, 0.15) 6px,
+      transparent 6px,
+      transparent 12px),
+    repeating-linear-gradient(135deg,
+      rgba(240, 248, 255, 0.15) 0px,
+      rgba(240, 248, 255, 0.15) 6px,
+      transparent 6px,
+      transparent 12px);
   background-size: cover;
 }
 
 header {
   width: 100%;
-  padding: 1rem;
+  padding: .5rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background-color: #f8f8fbc6; */
   backdrop-filter: blur(10px);
-  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 0 5px rgba(3, 3, 3, 0.2);
   position: fixed;
   top: 0;
   z-index: 10;
@@ -63,9 +74,9 @@ header ul li {
 }
 
 li a {
-  font-family: 'Supreme', sans-serif;
+  font-family: 'Audiowide', sans-serif;
   position: relative;
-  color: black;
+  color: #313131;
   text-decoration: none;
   font-size: 16px;
   font-weight: 600;
@@ -78,34 +89,45 @@ li a {
 }
 
 .active {
-  color: white;
-  background-color: #9e9cd0;
+  color: #8cab37;
   transition: none;
 }
 
-a::before {
+.active::before {
   content: '';
   position: absolute;
-  left: 0;
   bottom: 0;
-  height: 0;
+  left: 0;
+  height: 2px;
   width: 100%;
   border-radius: 10px;
-  background-color: #9e9cd0;
+  background-color: #8cab37;
+  z-index: -1;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  border-radius: 10px;
+  background-color: #b3b3ba;
   transition: all 0.3s;
   z-index: -1;
 }
 
-a:hover::before {
-  height: 100%;
+a:hover::after {
+  width: 100%;
 }
 
 a:hover {
-  color: #f8f8fb;
+  color: #8cab37;
 }
 
 li .login {
-  font-family: 'Supreme', sans-serif;
+  font-family: 'Audiowide', sans-serif;
   border: none;
   text-transform: uppercase;
   font-size: 16px;
@@ -114,16 +136,16 @@ li .login {
   z-index: 6;
   color: #f8f8fb;
   border-radius: 10px;
-  background-color: #7470b9;
+  background-color: #8cab37;
 }
 
 header h2 {
-  font-family: 'Bespoke', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   text-transform: uppercase;
-  font-size: 3.4rem;
+  font-size: 3.2rem;
   letter-spacing: -4px;
   margin-left: 1rem;
-  color: #7470b9;
+  color: #8cab37;
 }
 
 section {
@@ -142,29 +164,29 @@ section {
 }
 
 .home .left h1 {
-  font-family: 'Queering', sans-serif;
-  max-width: 750px;
-  font-size: 7.4rem;
-  line-height: 6.5rem;
-  -webkit-text-stroke: 2px #7470b9;
+  font-family: 'Orbitron', sans-serif;
+  max-width: 740px;
+  font-size: 5rem;
+  line-height: 4.5rem;
+  -webkit-text-stroke: 2px #8cab37;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1rem;
 }
 
 .home h5 {
-  font-family: 'Supreme', sans-serif;
+  font-family: 'Audiowide', sans-serif;
   font-size: 18px;
-  color: #7470b9;
+  color: #8cab37;
   margin-bottom: 1rem;
   margin: 2rem 0;
 }
 
 .home button {
-  font-family: 'Supreme', sans-serif;
+  font-family: 'Audiowide', sans-serif;
   font-size: 18px;
   color: white;
   border: none;
-  background-color: #7470b9;
+  background-color: #8cab37;
   padding: 0.8rem 1rem;
   cursor: pointer;
   transition: all 0.3s;
@@ -181,8 +203,7 @@ section {
 }
 
 .right img {
-  width: 680px;
-  height: 450px;
+  width: 500px;
   background: transparent;
   mix-blend-mode: multiply;
 }
@@ -213,16 +234,16 @@ section {
 }
 
 .showcase-text h1 {
-  font-family: 'Queering', sans-serif;
-  font-size: 4rem;
-  line-height: 4rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  line-height: 3rem;
   text-transform: capitalize;
   color: #5e5d88;
   margin-bottom: 1rem;
 }
 
 .showcase-text p {
-  font-family: 'Supreme', sans-serif;
+  font-family: 'Audiowide', sans-serif;
   font-size: 18px;
   color: #7470b9;
   margin-bottom: 1rem;
@@ -235,8 +256,8 @@ section {
 }
 
 .recipe-header h1 {
-  font-family: 'Queering', sans-serif;
-  font-size: 6rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4.5rem;
   line-height: 4rem;
   text-transform: uppercase;
   color: #5e5d88;
@@ -295,9 +316,9 @@ section {
 }
 
 .card-body .title {
-  font-family: 'Queering', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   margin-bottom: 1rem;
-  font-size: 30px;
+  font-size: 22px;
   text-transform: uppercase;
   line-height: 1;
   letter-spacing: 1px;
@@ -312,7 +333,7 @@ section {
 }
 
 .card-body .timer {
-  font-family: 'Supreme', sans-serif;
+  font-family: 'Audiowide', sans-serif;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -489,16 +510,17 @@ section {
 }
 
 .outer-container .profile {
+  font-family: 'Audiowide', sans-serif;
   display: flex;
   gap: 1rem;
   align-items: center;
 }
 
 .outer-container .title {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 800;
   color: #7470b9;
-  font-family: 'Queering', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   margin: 1rem 0;
   text-transform: uppercase;
 }
@@ -511,26 +533,24 @@ section {
 }
 
 .outer-container .recipe-details .ingredients {
-  font-family: 'Supreme', sans-serif;
   font-size: 18px;
   font-weight: 500;
   color: #3c3b56;
+  font-family: 'Audiowide', sans-serif;
 }
 
 .outer-container .recipe-details .instructions {
-  font-family: 'Supreme', sans-serif;
+  font-family: 'Audiowide', sans-serif;
   font-size: 18px;
   font-weight: 500;
   color: #3c3b56;
 }
-
-
 
 .menu-button {
   display: none;
   background-color: #7470b9;
   color: white;
-  font-family: 'Supreme', sans-serif;
+  font-family: 'Audiowide', sans-serif;
   padding: .5rem 1.5rem;
   font-size: 18px;
   border: none;
