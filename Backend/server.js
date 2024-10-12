@@ -13,6 +13,13 @@ app.use(
     origin: "https://food-blog-app-sooty.vercel.app/",
   })
 );
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; script-src 'self' blob:;"
+  );
+  next();
+});
 app.use(express.static("public"));
 
 app.use("/", require("./routes/user"));
