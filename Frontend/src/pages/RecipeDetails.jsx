@@ -13,7 +13,7 @@ export default function RecipeDetails() {
         </div>
         <h3 className="title">{recipe.title}</h3>
         <img
-          src={`http://localhost:5000/images/${recipe.coverImage}`}
+          src={`https://food-blog-app.onrender.com/images/${recipe.coverImage}`}
           width="220px"
           height="200px"></img>
         <div className="recipe-details">

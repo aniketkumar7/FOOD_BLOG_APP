@@ -44,7 +44,7 @@ export default function RecipeItems() {
   // This function deletes a recipe by its ID from the server.
   const onDelete = async (id) => {
     await axios
-      .delete(`http://localhost:5000/recipe/${id}`) // Send a DELETE request to the server.
+      .delete(`https://food-blog-app.onrender.com/recipe/${id}`) // Send a DELETE request to the server.
       .then((res) => console.log(res));
 
     // Update the 'allRecipes' state to remove the deleted recipe from the UI.
@@ -82,7 +82,7 @@ export default function RecipeItems() {
               className="card"
               onDoubleClick={() => navigate(`/recipe/${item._id}`)}>
               <img
-                src={`http://localhost:5000/images/${item.coverImage}`}></img>
+                src={`https://food-blog-app.onrender.com/images/${item.coverImage}`}></img>
               <div className="card-body">
                 <div className="title">{item.title}</div>
                 <div className="icons">
