@@ -797,8 +797,14 @@ section {
     font-size: 3rem;
   }
 
+  .modal{
+    width: 80%;
+    left: 10%;
+    background-color: aliceblue;
+  }
+
   .form {
-    width: 90%;
+    width: 100%;
   }
 
   .outer-container .recipe-details {
@@ -828,6 +834,7 @@ section {
 
   .form-control .input {
     font-size: 14px;
+    padding: 8px;
   }
 }
 
@@ -854,5 +861,15 @@ section {
   .recipe-header h1 {
     font-size: 2.5rem;
   }
+
+  .form{
+    width: 100%;
+  }
+
+.form-control .input {
+  font-size: 13px;
+  flex-basis: 100%;
+  padding: 7px;
+}
 
 }
