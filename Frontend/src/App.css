@@ -744,21 +744,21 @@ section {
     width: 100%;
     padding: 1rem 2rem;
     flex-direction: column;
-    height: 90%;
+    height: 80%;
     gap: 0;
   }
 
   .home .left h1 {
-    font-size: 4.5rem;
+    font-size: 4.3rem;
     line-height: 4rem;
   }
 
   .home h5 {
-    font-size: 1rem;
+    font-size: .9rem;
   }
 
   .home button {
-    font-size: .9rem;
+    font-size: .98rem;
     padding: .7rem 1rem;
   }
 
