@@ -800,7 +800,7 @@ section {
   .modal{
     width: 80%;
     left: 10%;
-    background-color: aliceblue;
+    background-color: rgb(247, 251, 254);
   }
 
   .form {
