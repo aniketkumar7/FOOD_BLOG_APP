@@ -29,7 +29,6 @@ body {
   min-height: 100vh;
   width: 100%;
   background-color: #e6f7ff;
-  /* Base color */
   background-image:
     radial-gradient(circle at 20% 30%, rgba(255, 223, 186, 0.6) 0%, transparent 70%),
     radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.8) 0%, transparent 70%),
@@ -732,7 +731,7 @@ section {
 @media (max-width: 480px) {
   header {
     width: 100%;
-    padding: .5rem .2rem;
+    padding: .5rem .8rem;
   }
 
   header h2 {
@@ -834,8 +833,26 @@ section {
 
 @media (max-width: 400px)
 {
-  .showcase-text h1 {
-    font-size: 1.5rem;
-    color : #5e5d88;
+  .menu-button{
+    margin-right: .5rem;
   }
+
+  .home .left h1 {
+    font-size: 3.6rem;
+    line-height: 3.5rem;
+  }
+
+  .showcase-text {
+    width: 88%;
+  }
+
+  .showcase-text h1 {
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+  }
+
+  .recipe-header h1 {
+    font-size: 2.5rem;
+  }
+
 }
