@@ -781,7 +781,7 @@ section {
   }
 
   .showcase-text h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     line-height: 2rem;
     ;
   }
@@ -832,13 +832,10 @@ section {
   }
 }
 
-@media screen and (max-width: 480px) {
-  .menu-over {
-    width: 100%;
+@media (max-width: 400px)
+{
+  .showcase-text h1 {
+    font-size: 1.5rem;
+    color : #5e5d88;
   }
-
-  .menu-contain li {
-    padding: 1rem 1rem;
-  }
-
 }
