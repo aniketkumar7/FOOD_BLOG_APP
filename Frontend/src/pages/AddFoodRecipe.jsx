@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function AddFoodRecipe() {
+  
   const [recipeData, setRecipeData] = useState({});
   const navigate = useNavigate();
 
@@ -30,6 +31,8 @@ export default function AddFoodRecipe() {
       })
       .then(() => navigate("/"));
   };
+
+
   return (
     <>
       <div className="container">
