@@ -8,6 +8,8 @@ import EditRecipe from "./pages/EditRecipe";
 import RecipeDetails from "./pages/RecipeDetails";
 import RecipeItems from "./components/RecipeItems";
 
+
+{/* Function to get all the recipes */}
 const getAllRecipes = async () => {
   let allRecipes = [];
   await axios.get("https://food-blog-app.onrender.com/recipe").then((res) => {
@@ -16,16 +18,22 @@ const getAllRecipes = async () => {
   return allRecipes;
 };
 
+
+{/* Function to get the recipes created by the user */}
 const getMyRecipes = async () => {
   let user = JSON.parse(localStorage.getItem("user"));
   let allRecipes = await getAllRecipes();
   return allRecipes.filter((item) => item.createdBy === user._id);
 };
 
+
+{/* Function to get the favourite recipes */}
 const getFavRecipes = () => {
   return JSON.parse(localStorage.getItem("fav"));
 };
 
+
+{/* Function to get the recipe details */}
 const getRecipe = async ({ params }) => {
   let recipe;
   await axios
@@ -41,6 +49,8 @@ const getRecipe = async ({ params }) => {
   return recipe;
 };
 
+
+{/* Router for the application */}
 const router = createBrowserRouter([
   {
     path: "/",
