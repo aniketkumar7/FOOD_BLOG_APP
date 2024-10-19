@@ -8,6 +8,7 @@ export default function InputForm({setIsOpen}) {
    const [isSignUp,setIsSignUp]=useState(false)
    const [error,setError]=useState("")
 
+   // Handle the form submission
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     let endpoint = isSignUp ? "signUp" : "login";
