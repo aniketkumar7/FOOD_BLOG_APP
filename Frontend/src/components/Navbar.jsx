@@ -13,10 +13,12 @@ const Navbar = () => {
   const [isLogin, setIsLogin] = useState(token ? false : true);
   // let user = JSON.parse(localStorage.getItem("user"));
 
+  // Check if token is present
   useEffect(() => {
     setIsLogin(token ? false : true);
   }, [token]);
 
+  // Check if user is logged in
   const checkLogin = () => {
     if (token) {
       localStorage.removeItem("token");
@@ -28,6 +30,7 @@ const Navbar = () => {
     }
   };
 
+  // Toggle menu
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };
