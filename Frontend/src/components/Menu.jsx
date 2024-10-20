@@ -1,6 +1,11 @@
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
+// Menu component
+// This component renders the menu items for the application
+// It takes two props:
+//   isLogin: a boolean indicating whether the user is logged in or not
+//   onLoginClick: a function to handle the login/logout click event
 const Menu = ({ isLogin, onLoginClick }) => {
   return (
     <ul className="menu-contain">
