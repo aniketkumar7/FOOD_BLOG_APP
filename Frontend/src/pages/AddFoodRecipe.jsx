@@ -3,11 +3,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function AddFoodRecipe() {
-  
+
   const [recipeData, setRecipeData] = useState({});
   const navigate = useNavigate();
 
 
+  // Handle the form submission
   const onHandleChange = (e) => {
     let val =
       e.target.name === "ingredients"
@@ -19,6 +20,7 @@ export default function AddFoodRecipe() {
   };
 
 
+  //   Handle the form submission
   const onHandleSubmit = async (e) => {
     e.preventDefault();
     console.log(recipeData);
