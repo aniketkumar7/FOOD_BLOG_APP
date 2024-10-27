@@ -12,11 +12,6 @@
   src: url(./fonts/Supreme-Variable.ttf) format("truetype");
 }
 
-@font-face {
-  font-family: 'Bespoke';
-  src: url(./fonts/BespokeStencil-Variable.ttf) format("truetype");
-}
-
 * {
   padding: 0;
   margin: 0;
