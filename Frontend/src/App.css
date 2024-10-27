@@ -2,10 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
-@font-face {
-  font-family: "Queering";
-  src: url(./fonts/Queering-Bold.ttf) format("truetype");
-}
 
 @font-face {
   font-family: 'Supreme';
