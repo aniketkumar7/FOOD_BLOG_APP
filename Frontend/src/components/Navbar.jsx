@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Modal from "./Modal"
 import InputForm from "./InputForm"
 import { NavLink } from "react-router-dom"
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import Menu from './Menu';
 
 const Navbar = () => {
@@ -46,9 +46,11 @@ const Navbar = () => {
           <li onClick={() => isLogin && setIsOpen(true)}>
             <NavLink to={!isLogin ? "/myRecipe" : "/"}>My Recipe</NavLink>
           </li>
+          
           <li onClick={() => isLogin && setIsOpen(true)}>
             <NavLink to={!isLogin ? "/favRecipe" : "/"}>Favourites</NavLink>
           </li>
+
           <li onClick={checkLogin}>
             <p className="login">
               {isLogin ? "Login" : "Logout"}
