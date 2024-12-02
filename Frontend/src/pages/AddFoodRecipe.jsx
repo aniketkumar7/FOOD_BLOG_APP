@@ -23,7 +23,7 @@ export default function AddFoodRecipe() {
   //   Handle the form submission
   const onHandleSubmit = async (e) => {
     e.preventDefault();
-    console.log(recipeData);
+    
     await axios
       .post("https://food-blog-app.onrender.com/recipe", recipeData, {
         headers: {
