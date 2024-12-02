@@ -35,7 +35,6 @@ export default function EditRecipe() {
   };
   const onHandleSubmit = async (e) => {
     e.preventDefault();
-    console.log(recipeData);
     await axios
       .put(`https://food-blog-app.onrender.com/recipe/${id}`, recipeData, {
         headers: {
