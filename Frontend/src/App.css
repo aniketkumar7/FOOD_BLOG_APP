@@ -283,8 +283,8 @@ li .login:hover {
 
 /* Card Styles */
 .card {
-  width: 350px;
-  height: 450px;
+  width: 320px;
+  height: 400px;
   box-shadow: var(--shadow-sm);
   background-color: var(--neutral-100);
   backdrop-filter: var(--blur-effect);
@@ -1162,4 +1162,170 @@ li .login:hover {
   .menu-contain li {
     padding: 1rem;
   }
+}
+
+.edit-recipe-container {
+  max-width: 800px;
+  margin: 8rem auto 2rem;
+  padding: 2.5rem;
+  background-color: var(--neutral-100);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.edit-recipe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.edit-recipe-form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.edit-recipe-form-control label {
+  font-family: var(--font-accent);
+  color: var(--neutral-400);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.edit-recipe-input,
+.edit-recipe-textarea {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 2px solid var(--neutral-500);
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--neutral-400);
+  background-color: var(--neutral-200);
+  transition: all 0.3s ease;
+}
+
+.edit-recipe-input:focus,
+.edit-recipe-textarea:focus {
+  outline: none;
+  border-color: var(--primary-100);
+  background-color: var(--neutral-100);
+  box-shadow: 0 0 0 4px rgba(140, 171, 55, 0.15);
+}
+
+.edit-recipe-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.edit-recipe-file-input {
+  padding: 1rem;
+  border: 2px dashed var(--neutral-500);
+  border-radius: 8px;
+  background-color: var(--neutral-200);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-recipe-file-input:hover {
+  border-color: var(--primary-100);
+  background-color: var(--neutral-300);
+}
+
+.edit-recipe-submit {
+  background-color: var(--primary-100);
+  color: var(--neutral-100);
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-accent);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.edit-recipe-submit:hover {
+  background-color: var(--primary-200);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(140, 171, 55, 0.2);
+}
+
+.edit-recipe-submit:active {
+  transform: translateY(0);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 868px) {
+  .edit-recipe-container {
+    margin: 6rem 2rem 2rem;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .edit-recipe-container {
+    margin: 5rem 1rem 1rem;
+    padding: 1.5rem;
+  }
+
+  .edit-recipe-form {
+    gap: 1.2rem;
+  }
+
+  .edit-recipe-submit {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .edit-recipe-input,
+  .edit-recipe-textarea {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .edit-recipe-form-control label {
+    font-size: 0.9rem;
+  }
+}
+
+/* Placeholder styling */
+.edit-recipe-input::placeholder,
+.edit-recipe-textarea::placeholder {
+  color: var(--neutral-500);
+  opacity: 0.7;
+}
+
+/* Error states */
+.edit-recipe-input.error,
+.edit-recipe-textarea.error {
+  border-color: #ff4444;
+  background-color: #fff8f8;
+}
+
+/* Disabled states */
+.edit-recipe-submit:disabled {
+  background-color: var(--neutral-500);
+  cursor: not-allowed;
+  transform: none;
 }
