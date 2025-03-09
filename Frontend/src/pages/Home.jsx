@@ -1,4 +1,4 @@
-import foodRecipe from "../assets/recipe.png";
+import foodRecipe from "../assets/home.png";
 import { useState } from "react";
 import RecipeItems from "../components/RecipeItems";
 import { useNavigate } from "react-router-dom";
