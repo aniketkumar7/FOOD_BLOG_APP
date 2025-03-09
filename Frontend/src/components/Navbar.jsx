@@ -1,79 +1,125 @@
-import { useEffect, useState } from 'react'
-import Modal from "./Modal"
-import InputForm from "./InputForm"
-import { NavLink } from "react-router-dom"
-import { useNavigate } from 'react-router-dom';
-import Menu from './Menu';
+import { useEffect, useState } from "react";
+import Modal from "./Modal";
+import InputForm from "./InputForm";
+import { NavLink, useNavigate } from "react-router-dom";
+import Menu from "./Menu";
 
 const Navbar = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  let token = localStorage.getItem("token");
-  const [isLogin, setIsLogin] = useState(token ? false : true);
-  // let user = JSON.parse(localStorage.getItem("user"));
+  // Initialize login state based on token existence
+  const [isLogin, setIsLogin] = useState(!localStorage.getItem("token"));
 
-  // Check if token is present
+  // Navigation items configuration
+  const navItems = [
+    { path: "/", label: "Home" },
+    {
+      path: "/myRecipe",
+      label: "My Recipe",
+      requiresAuth: true,
+    },
+    {
+      path: "/favRecipe",
+      label: "Favourites",
+      requiresAuth: true,
+    },
+  ];
+
+  // Update login state whenever token changes
   useEffect(() => {
-    setIsLogin(token ? false : true);
-  }, [token]);
+    const handleLoginState = () => {
+      const token = localStorage.getItem("token");
+      setIsLogin(!token);
+    };
 
-  // Check if user is logged in
-  const checkLogin = () => {
-    if (token) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      setIsLogin(true);
-      navigate("/");
-    } else {
+    // Initial check
+    handleLoginState();
+
+    // Add event listener for storage changes
+    window.addEventListener("storage", handleLoginState);
+
+    return () => {
+      window.removeEventListener("storage", handleLoginState);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setIsLogin(true);
+    navigate("/");
+  };
+
+  const handleAuthAction = () => {
+    if (isLogin) {
+      // If not logged in, show login modal
       setIsOpen(true);
+    } else {
+      // If logged in, handle logout
+      handleLogout();
     }
   };
 
-  // Toggle menu
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
+  const handleLoginSuccess = () => {
+    setIsLogin(false);
+    setIsOpen(false);
+  };
+
+  const renderNavItems = () => {
+    return navItems.map(({ path, label, requiresAuth }) => (
+      <li
+        key={path}
+        onClick={() => {
+          if (requiresAuth && isLogin) {
+            setIsOpen(true);
+          }
+        }}>
+        <NavLink to={requiresAuth && isLogin ? "/" : path}>{label}</NavLink>
+      </li>
+    ));
   };
 
   return (
     <>
       <header>
         <h2 onClick={() => navigate("/")}>Foodie</h2>
-        <ul>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li onClick={() => isLogin && setIsOpen(true)}>
-            <NavLink to={!isLogin ? "/myRecipe" : "/"}>My Recipe</NavLink>
-          </li>
-          
-          <li onClick={() => isLogin && setIsOpen(true)}>
-            <NavLink to={!isLogin ? "/favRecipe" : "/"}>Favourites</NavLink>
-          </li>
-
-          <li onClick={checkLogin}>
-            <p className="login">
-              {isLogin ? "Login" : "Logout"}
-              {/* {user?.email ? `(${user?.email})` : ""} */}
-            </p>
-          </li>
-        </ul>
-        <button className="menu-button" onClick={toggleMenu}>
+        <nav>
+          <ul>
+            {renderNavItems()}
+            <li onClick={handleAuthAction}>
+              <p className="login">{isLogin ? "Login" : "Logout"}</p>
+            </li>
+          </ul>
+        </nav>
+        <button
+          className="menu-button"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? "Close" : "Menu"}
         </button>
       </header>
+
+      {/* Login Modal */}
       {isOpen && (
         <Modal onClose={() => setIsOpen(false)}>
-          <InputForm setIsOpen={() => setIsOpen(false)} />
+          <InputForm
+            onLoginSuccess={handleLoginSuccess}
+            setIsOpen={setIsOpen}
+          />
         </Modal>
       )}
+
+      {/* Mobile Menu */}
       <div className={`menu-over ${isMenuOpen ? "open" : ""}`}>
-        <button className="menu-button close" onClick={toggleMenu}>
-          {isMenuOpen ? "Close" : "Menu"}
+        <button
+          className="menu-button close"
+          onClick={() => setIsMenuOpen(false)}>
+          Close
         </button>
-        <Menu isLogin={isLogin} onLoginClick={checkLogin} />
+        <Menu isLogin={isLogin} onLoginClick={handleAuthAction} />
       </div>
     </>
   );
-}
-export default Navbar
+};
+
+export default Navbar;
