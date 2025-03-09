@@ -6,124 +6,151 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import axios from "axios";
 
+
 export default function RecipeItems() {
-  // UseLoaderData is used to get the data from the server
   const recipes = useLoaderData();
-
-  // initializing a state variable 'allRecipes' to hold all recipe data.
-  const [allRecipes, setAllRecipes] = useState();
-
-  // This line checks the current URL path to determine if the user is on the "/myRecipe" page.
-  let path = window.location.pathname === "/myRecipe" ? true : false;
-
-  // localStorage is a web storage API that allows us to store data in the browser.
-  // We attempt to get the "fav" key from local storage, and if it doesn't exist, we default to an empty array ([])
-  let favItems = useMemo(
-    () => JSON.parse(localStorage.getItem("fav")) ?? [],
-    []
-  );
-
-  // to track whether the current recipe is a favorite or not.
-  // Use an object to track favorite status for each recipe
-  const [favStatus, setFavStatus] = useState({});
-
-  // useNavigate is a hook from React Router that provides a function to programmatically navigate
   const navigate = useNavigate();
+  const isMyRecipePage = window.location.pathname === "/myRecipe";
 
-  // To set the 'allRecipes' state whenever the 'recipes' data changes.
+  const [allRecipes, setAllRecipes] = useState([]);
+  const [favorites, setFavorites] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
+  const [imageErrors, setImageErrors] = useState({});
+
+  const savedFavorites = useMemo(() => {
+    const saved = localStorage.getItem("fav");
+    return saved ? JSON.parse(saved) : [];
+  }, []);
+
   useEffect(() => {
     setAllRecipes(recipes);
-    // Initialize favorite status based on local storage
-    const initialFavStatus = {};
-    favItems.forEach((item) => {
-      initialFavStatus[item._id] = true; // Mark as favorite
+    const favoritesLookup = {};
+    savedFavorites.forEach((item) => {
+      favoritesLookup[item._id] = true;
     });
-    setFavStatus(initialFavStatus);
-  }, [recipes, favItems]); // Include favItems to reinitialize when it changes // The effect runs whenever 'recipes' changes.
+    setFavorites(favoritesLookup);
+  }, [recipes, savedFavorites]);
 
-  // This function deletes a recipe by its ID from the server.
-  const onDelete = async (id) => {
-    await axios
-      .delete(`https://food-blog-app.onrender.com/recipe/${id}`) // Send a DELETE request to the server.
-      .then((res) => console.log(res));
+  // Filter recipes based on search term
+  const filteredRecipes = useMemo(() => {
+    return allRecipes?.filter((recipe) =>
+      recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [allRecipes, searchTerm]);
 
-    // Update the 'allRecipes' state to remove the deleted recipe from the UI.
-    setAllRecipes((recipes) => recipes.filter((recipe) => recipe._id !== id));
-    // Update the favorite items in local storage by filtering out the deleted recipe.
-    let filterItem = favItems.filter((recipe) => recipe._id !== id);
-    localStorage.setItem("fav", JSON.stringify(filterItem));
+  const handleDelete = async (id, event) => {
+    event.stopPropagation();
+    try {
+      await axios.delete(`https://recipeapp-vut0.onrender.com/recipe/${id}`);
+      setAllRecipes((current) => current.filter((recipe) => recipe._id !== id));
+      const updatedFavorites = savedFavorites.filter(
+        (recipe) => recipe._id !== id
+      );
+      localStorage.setItem("fav", JSON.stringify(updatedFavorites));
+    } catch (error) {
+      console.error("Failed to delete recipe:", error);
+    }
   };
 
-  const favRecipe = (item) => {
-    const isCurrentlyFav = favStatus[item._id] || false;
+  const toggleFavorite = (item, event) => {
+    event.stopPropagation();
+    const isFavorite = favorites[item._id];
+    const updatedFavorites = isFavorite
+      ? savedFavorites.filter((recipe) => recipe._id !== item._id)
+      : [...savedFavorites, item];
+    localStorage.setItem("fav", JSON.stringify(updatedFavorites));
+    setFavorites((current) => ({
+      ...current,
+      [item._id]: !isFavorite,
+    }));
+  };
 
-    // Toggle favorite status
-    const newFavStatus = {
-      ...favStatus,
-      [item._id]: !isCurrentlyFav,
-    };
+  const handleImageError = (recipeId) => {
+    setImageErrors((prev) => ({
+      ...prev,
+      [recipeId]: true,
+    }));
+  };
 
-    // Update local storage
-    let updatedFavItems = isCurrentlyFav
-      ? favItems.filter((recipe) => recipe._id !== item._id) // Remove from favorites
-      : [...favItems, item]; // Add to favorites
-
-    localStorage.setItem("fav", JSON.stringify(updatedFavItems));
-    setFavStatus(newFavStatus); // Update state
+  const getImageUrl = (imageName) => {
+    if (!imageName) return "";
+    // Make sure the URL is absolute and properly formatted
+    return `https://recipeapp-vut0.onrender.com/images/${imageName}`;
   };
 
   return (
     <div className="contain">
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search recipes..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+        {searchTerm && (
+          <button className="clear-search" onClick={() => setSearchTerm("")}>
+            ×
+          </button>
+        )}
+      </div>
+
       <div className="card-container">
-        {allRecipes?.map((item, index) => {
-          return (
+        {filteredRecipes?.length === 0 ? (
+          <div className="no-results">No recipes found</div>
+        ) : (
+          filteredRecipes?.map((recipe) => (
             <div
-              key={index}
+              key={recipe._id}
               className="card"
-              onDoubleClick={() => navigate(`/recipe/${item._id}`)}>
-              <img
-                src={`https://food-blog-app.onrender.com/images/${item.coverImage}`}></img>
+              onDoubleClick={() => navigate(`/recipe/${recipe._id}`)}>
+              <div className="image-container">
+                {!imageErrors[recipe._id] ? (
+                  <img
+                    src={getImageUrl(recipe.coverImage)}
+                    alt={recipe.title}
+                    onError={() => handleImageError(recipe._id)}
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="image-fallback">
+                    <span>{recipe.title[0]}</span>
+                  </div>
+                )}
+              </div>
               <div className="card-body">
-                <div className="title">{item.title}</div>
+                <div className="title">{recipe.title}</div>
                 <div className="icons">
                   <div className="timer">
                     <BsStopwatchFill />
-                    {item.time}
+                    {recipe.time}
                   </div>
 
-                  {!path ? (
-                    <FaHeart
-                      onClick={(e) => {
-                        e.stopPropagation(); // Prevent click event from bubbling up
-                        favRecipe(item);
-                      }}
-                      style={{
-                        color:
-                          favItems.some((res) => res._id === item._id) ||
-                          favStatus[item._id]
-                            ? "red"
-                            : "",
-                      }}
-                    />
-                  ) : (
+                  {isMyRecipePage ? (
                     <div className="action">
-                      <Link to={`/editRecipe/${item._id}`} className="editIcon">
+                      <Link
+                        to={`/editRecipe/${recipe._id}`}
+                        className="editIcon">
                         <FaEdit />
                       </Link>
                       <MdDelete
-                        onClick={(e) => {
-                          e.stopPropagation(); // Prevent click event from bubbling up
-                          onDelete(item._id);
-                        }}
+                        onClick={(e) => handleDelete(recipe._id, e)}
                         className="deleteIcon"
                       />
                     </div>
+                  ) : (
+                    <FaHeart
+                      onClick={(e) => toggleFavorite(recipe, e)}
+                      style={{
+                        color: favorites[recipe._id] ? "red" : "",
+                      }}
+                    />
                   )}
                 </div>
               </div>
             </div>
-          );
-        })}
+          ))
+        )}
       </div>
     </div>
   );
