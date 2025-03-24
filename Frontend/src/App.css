@@ -1061,7 +1061,7 @@ li .login:hover {
   /* Header Adjustments */
   header {
     width: 100%;
-    padding: .5rem .2rem;
+    padding: .5rem .6rem;
   }
 
   header h2 {
@@ -1072,6 +1072,7 @@ li .login:hover {
   /* Home Section */
   .home {
     width: 100%;
+    margin-top: 1.5rem;
     padding: 1rem 2rem;
     flex-direction: column;
     height: 100%;
