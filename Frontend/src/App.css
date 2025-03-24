@@ -149,7 +149,7 @@ li .login:hover {
 
 /* Home Section */
 .home {
-  min-height: 100vh;
+  min-height: 65vh;
   padding: 7rem 4rem 4rem;
   display: flex;
   align-items: center;
@@ -1073,7 +1073,7 @@ li .login:hover {
   /* Home Section */
   .home {
     width: 100%;
-    margin-top: 1.8rem;
+    margin-top: 3rem;
     padding: 1rem 2rem;
     padding-bottom: 0rem;
     flex-direction: column;
@@ -1082,7 +1082,7 @@ li .login:hover {
   }
 
   .home .left h1 {
-    font-size: 4rem;
+    font-size: 3.85rem;
     line-height: 1;
   }
 
