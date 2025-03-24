@@ -481,17 +481,17 @@ li .login:hover {
   color: var(--neutral-400);
 }
 
-.search-input:focus {
+.-input:focus {
   outline: none;
   border-color: var(--primary-100);
   box-shadow: 0 0 0 3px rgba(140, 171, 55, 0.1);
 }
 
-.search-input::placeholder {
+.-input::placeholder {
   color: var(--neutral-500);
 }
 
-.clear-search {
+.clear- {
   position: absolute;
   right: 1.5rem;
   top: 50%;
@@ -508,7 +508,7 @@ li .login:hover {
   transition: color 0.3s ease;
 }
 
-.clear-search:hover {
+.clear-:hover {
   color: var(--primary-100);
 }
 
@@ -523,17 +523,17 @@ li .login:hover {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-  .search-container {
+  .-container {
     max-width: 100%;
     margin: 1rem auto;
   }
 
-  .search-input {
+  .-input {
     font-size: 1rem;
     padding: 0.8rem 1.2rem;
   }
 
-  .clear-search {
+  .clear- {
     right: 1.2rem;
     font-size: 1.2rem;
   }
@@ -541,7 +541,8 @@ li .login:hover {
 
 @media (max-width: 480px) {
   .search-container {
-    margin: 0.5rem auto;
+    margin: 0rem auto;
+    margin-top: 1.5rem;
   }
 
   .search-input {
@@ -1072,16 +1073,16 @@ li .login:hover {
   /* Home Section */
   .home {
     width: 100%;
-    margin-top: 1.5rem;
+    margin-top: 1.8rem;
     padding: 1rem 2rem;
     flex-direction: column;
-    height: 100%;
+    height: 90%;
     gap: 0;
   }
 
   .home .left h1 {
-    font-size: 4.5rem;
-    line-height: 1.1;
+    font-size: 4.2rem;
+    line-height: 1;
   }
 
   .home h5 {
